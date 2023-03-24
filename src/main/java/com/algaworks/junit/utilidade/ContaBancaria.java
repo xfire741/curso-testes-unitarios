@@ -4,24 +4,55 @@ import java.math.BigDecimal;
 
 public class ContaBancaria {
 
+    private BigDecimal saldo;
+
     public ContaBancaria(BigDecimal saldo) {
-        //TODO 1 - validar saldo: não pode ser nulo, caso seja, deve lançar uma IllegalArgumentException
-        //TODO 2 - pode ser zero ou negativo
+        if (saldo == null) {
+            throw new IllegalArgumentException("Saldo não pode ser nulo");
+        }
+        this.saldo = saldo;
     }
 
     public void saque(BigDecimal valor) {
-        //TODO 1 - validar valor: não pode ser nulo, zero ou menor que zero, caso seja, deve lançar uma IllegalArgumentException
-        //TODO 2 - Deve subtrair o valor do saldo
-        //TODO 3 - Se o saldo for insuficiente deve lançar uma RuntimeException
+        int menorOuIgualZero = 0;
+
+        try {
+           menorOuIgualZero = valor.compareTo(BigDecimal.ZERO);
+        } catch (NullPointerException e) {
+            throw  new IllegalArgumentException("Valor do saque não pode ser nulo");
+        }
+
+        if (menorOuIgualZero <= 0) {
+            throw new IllegalArgumentException("Valor de saque não pode ser menor ou igual a zero");
+        }
+
+        var saldoInsuficiente = this.saldo.compareTo(valor);
+
+
+        if (saldoInsuficiente <= 0) {
+            throw new RuntimeException("Valor insuficiente para saque");
+        }
+
+        this.saldo = saldo.subtract(valor);
     }
 
     public void deposito(BigDecimal valor) {
-        //TODO 1 - validar valor: não pode ser nulo, zero ou menor que zero, caso seja, deve lançar uma IllegalArgumentException
-        //TODO 2 - Deve adicionar o valor ao saldo
+        int menorOuIgualZero = 0;
+
+        try {
+            menorOuIgualZero = valor.compareTo(BigDecimal.ZERO);
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException("Valor de depósito não pode ser nulo");
+        }
+
+        if (menorOuIgualZero <= 0) {
+            throw new IllegalArgumentException("Valor de saque não pode ser menor ou igual a zero");
+        }
+
+        this.saldo = saldo.add(valor);
     }
 
     public BigDecimal saldo() {
-        //TODO 1 - retornar saldo
-        return null;
+        return this.saldo;
     }
 }

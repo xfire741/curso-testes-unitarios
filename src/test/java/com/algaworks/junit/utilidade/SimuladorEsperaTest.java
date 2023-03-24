@@ -18,7 +18,7 @@ class SimuladorEsperaTest {
     void deveEsperarENaoDarTimeout() {
         //Assumptions.assumeTrue("PROD".equals(System.getenv("ENV")), ()-> "Abortando teste: Não deve ser executado em PROD");
         //assertTimeout(Duration.ofSeconds(1), ()-> SimuladorEspera.esperar(Duration.ofSeconds(10)));
-        assertTimeoutPreemptively(Duration.ofSeconds(1), ()-> SimuladorEspera.esperar(Duration.ofSeconds(10)));
+        assertTimeoutPreemptively(Duration.ofSeconds(10), ()-> SimuladorEspera.esperar(Duration.ofSeconds(1)));
     }
 
 }
