@@ -1,13 +1,17 @@
 package com.algaworks.junit.utilidade;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Testes no utilitário de Saudação")
 class SaudacaoUtilTest {
 
+
     @Test
+    @DisplayName("Teste de saudação, deve dar bom dia")
     public void saudarTest() {
         //Arrange
         int horaValida = 9;
